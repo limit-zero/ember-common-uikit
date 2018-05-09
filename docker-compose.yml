@@ -1,0 +1,21 @@
+version: '3'
+services:
+  app:
+    tty: true
+    image: danlynn/ember-cli:latest
+    ports:
+      - "${EMBER_SERVE_PORT-9905}:${EMBER_SERVE_PORT-9905}"
+      - "${EMBER_LIVER_PORT-9906}:${EMBER_LIVER_PORT-9906}"
+      - "${EMBER_TESTS_PORT-9907}:${EMBER_TESTS_PORT-9907}"
+    volumes:
+      - .:/myapp:cached
+      - node_modules:/myapp/node_modules
+      - tmp:/myapp/tmp
+    restart: on-failure
+    entrypoint: "./node_modules/.bin/ember server --port ${EMBER_SERVE_PORT-9905} --live-reload-port ${EMBER_LIVER_PORT-9906}"
+volumes:
+  node_modules: {}
+  tmp:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
