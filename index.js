@@ -1,5 +1,5 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-common-uikit'
+  name: '@limit0/ember-common-uikit'
 };
